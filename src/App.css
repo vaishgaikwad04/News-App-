@@ -1,0 +1,8 @@
+:root {
+  --color-dark-blue: #1B365D; /* deep navy */
+  --gig-pop: #f8c0db;
+       /* bright pink */
+}
+
+
+@import "tailwindcss";
