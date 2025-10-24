@@ -9,7 +9,7 @@ const TrendingNews = () => {
     const fetchTrending = async () => {
       try {
         const res = await fetch(
-          `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=in&max=10&apikey=${API_KEY}`
+          `https://cors-anywhere.herokuapp.com/https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=in&max=10&apikey=${API_KEY}`
         );
         const data = await res.json();
         setNews(data.articles || []);

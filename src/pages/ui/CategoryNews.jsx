@@ -11,7 +11,7 @@ export default function CategoryNews() {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&apikey=ab6bf503124be66cffbd9a87b5591339`
+          `https://cors-anywhere.herokuapp.com/https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&apikey=ab6bf503124be66cffbd9a87b5591339`
         );
         const data = await res.json();
         setNews(data.articles || []);

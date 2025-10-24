@@ -17,22 +17,30 @@ const Fetch = () => {
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState("general");
 
+  // ✅ Function to fetch news with CORS proxy
   const fetchNews = async (selectedCategory) => {
     setLoading(true);
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/https://api.allorigins.win/get?url="; // Free proxy to fix CORS
+    const targetUrl = `https://cors-anywhere.herokuapp.com/https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=ab6bf503124be66cffbd9a87b5591339`;
+
     try {
-      const res = await fetch(
-        `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=ab6bf503124be66cffbd9a87b5591339`
-      );
-      const data = await res.json();
-      console.log(data.articles)
-      setNews(data.articles || []);
+      const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+      const data = await response.json();
+
+      // The API response is wrapped in a "contents" string, so we parse it
+      const parsedData = JSON.parse(data.contents);
+
+      console.log(parsedData.articles);
+      setNews(parsedData.articles || []);
     } catch (err) {
       console.error("Error fetching news:", err);
+      setNews([]);
     } finally {
       setLoading(false);
     }
   };
 
+  // Fetch news whenever the category changes
   useEffect(() => {
     fetchNews(category);
   }, [category]);

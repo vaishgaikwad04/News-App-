@@ -9,7 +9,7 @@ const HotNews = () => {
     const fetchHotNews = async () => {
       try {
         const res = await fetch(
-          `https://gnews.io/api/v4/top-headlines?lang=en&country=in&max=8&apikey=${API_KEY}`
+          `https://cors-anywhere.herokuapp.com/https://gnews.io/api/v4/top-headlines?lang=en&country=in&max=8&apikey=${API_KEY}`
         );
         const data = await res.json();
         setNews(data.articles || []);
