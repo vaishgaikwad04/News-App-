@@ -20,11 +20,11 @@ const Fetch = () => {
   // ✅ Function to fetch news with CORS proxy
   const fetchNews = async (selectedCategory) => {
     setLoading(true);
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/https://api.allorigins.win/get?url="; // Free proxy to fix CORS
-    const targetUrl = `https://cors-anywhere.herokuapp.com/https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=ab6bf503124be66cffbd9a87b5591339`;
+    const targetUrl = `https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=ab6bf503124be66cffbd9a87b5591339`;
 
     try {
-      const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+      const response = await fetch(encodeURIComponent(targetUrl));
+      console.log(response)
       const data = await response.json();
 
       // The API response is wrapped in a "contents" string, so we parse it
